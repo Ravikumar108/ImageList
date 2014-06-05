@@ -1,0 +1,45 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="ImageList.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"    
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ViewModels="clr-namespace:ImageList.ViewModels"   
+    mc:Ignorable="d"    
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <phone:PhoneApplicationPage.Resources>
+
+        <phone:JumpListItemBackgroundConverter x:Key="BackgroundConverter"/>
+        <phone:JumpListItemForegroundConverter x:Key="ForegroundConverter"/>
+        
+        <DataTemplate x:Key="ItemTemplate">
+            <StackPanel Height="144" Width="144" Margin="6,6">
+                <Image Width="144" Height="144" Stretch="UniformToFill">
+                    <Image.Source>
+                        <BitmapImage UriSource="{Binding _location}" CreateOptions="BackgroundCreation"/>
+                    </Image.Source>
+                </Image>
+            </StackPanel>
+        </DataTemplate>
+
+    </phone:PhoneApplicationPage.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent"
+           d:DataContext="{d:DesignInstance Type=ViewModels:ImageViewModel, IsDesignTimeCreatable=true}">
+        <phone:LongListSelector Name="ImageLLS" Margin="13,-30,0,0"
+                                        ItemsSource="{Binding _Images}"
+                                        ItemTemplate="{StaticResource ItemTemplate}"                     
+                                        IsGroupingEnabled="False"
+                                        LayoutMode="Grid" 
+                                        GridCellSize="144,144"/>
+
+    </Grid>
+
+</phone:PhoneApplicationPage>
