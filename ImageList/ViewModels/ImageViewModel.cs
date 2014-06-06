@@ -11,7 +11,8 @@ namespace ImageList.ViewModels
         {
             get
             {
-                var Images = DataSource.GetImages();
+
+                var Images = new DataSource().GetImages();
                 return new List<Image>(Images);
             }
         }
